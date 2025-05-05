@@ -1,0 +1,14 @@
+create table tbladmin(Id int not null auto_increment primary key,firstName varchar(30) not null , lastName varchar(30) not null,emailAddress varchar(50) not null unique , password varchar(50) not null unique);
+
+ create table tblclass(Id int not null primary key auto_increment, className varchar(50) not null unique);
+
+  create table tblclassarms(Id int not null primary key auto_increment,classId int not null,classArmName varchar(50) not null unique ,FOREIGN KEY (classId) REFERENCES tblclass(Id));
+
+
+ create table tblclassteacher(Id int not null primary key auto_increment,firstName varchar(30) not null,lastName varchar(30) not null,emailAddress varchar(50) not null unique, password varchar(50) not null unique,phoneNo varchar(10) not null,classId int not null,classArmId int not null,dateCreated varchar(20) not null,FOREIGN KEY (classId) REFERENCES tblclass(Id),FOREIGN KEY (classArmId) REFERENCES tblclassarms(Id));
+
+
+ create table tblstudents(Id int not null primary key auto_increment,firstName varchar(30) not null,lastName varchar(30) not null,otherName varchar(30) not null,admissionNumber varchar(50) not null unique, phoneNo varchar(10) not null,classId int not null,classArmId int not null,dateCreated varchar(20) not null,FOREIGN KEY (classId) REFERENCES tblclass(Id),FOREIGN KEY (classArmId) REFERENCES tblclassarms(Id));
+
+
+create table tblattendance(Id int not null primary key auto_increment,admissionNo varchar(50) not null,classId int not null,classArmId int not null,dateTimeTaken varchar(20) not null,FOREIGN KEY (classId) REFERENCES tblclass(Id),FOREIGN KEY (classArmId) REFERENCES tblclassarms(Id));
